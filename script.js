@@ -31,7 +31,7 @@ function Book(title, author, pages, year, language) {
                     </div>
                     <br>
                     <div class="read-status">
-                    <input type="checkbox">Mark as Read</input>
+                    <input type="checkbox" id="read${id}">Mark as Read</input>
                     </div>
                     `;
 
@@ -50,22 +50,51 @@ function deleteBook(event) {
     console.log(idx, myLibrary);
 }
 
+function updateReadStatus(event) {
+    let idx = event.target.id.slice(4);
+    if (myLibrary[idx].read) {
+        myLibrary[idx].read = false;
+    } else {
+        myLibrary[idx].read = true;
+    }
+    console.log(idx, myLibrary[idx].read);
+    // change background color based on read status
+    let bookCard = document.getElementById(`book${idx}`);
+    console.log(bookCard);
+    if (myLibrary[idx].read) {
+        bookCard.style.backgroundColor = style.getPropertyValue('--read-color');
+    } else {
+        bookCard.style.backgroundColor =
+            style.getPropertyValue('--unread-color');
+    }
+}
+
 function displayBooks() {
     bookContainer = document.querySelector('.books-container');
     bookContainer.innerHTML = '';
     for (let i = 0; i < myLibrary.length; i++) {
         let bookCard = document.createElement('div');
         bookCard.className = 'book-card';
+        bookCard.id = `book${i}`;
         bookCard.innerHTML = myLibrary[i].getHTML(i);
         bookContainer.appendChild(bookCard);
     }
 
+    // adds listener for delete buttons
     let deleteBtn = document.querySelectorAll('.deleteBtn');
     for (let btn of deleteBtn) {
         btn.addEventListener('click', deleteBook);
     }
+
+    // adds listener for mark as read toggle
+
+    let toggles = document.querySelectorAll('input[type=checkbox]');
+    for (let toggle of toggles) {
+        toggle.addEventListener('input', updateReadStatus);
+    }
 }
 
+var style = window.getComputedStyle(document.body);
 
 const myLibrary = [];
 

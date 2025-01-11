@@ -1,7 +1,8 @@
 :root {
     --card-width: 300px;
     --card-height: 180px;
-
+    --read-color: #D3BCC0;
+    --unread-color: #FFE8D1;
 }
 
 
@@ -40,9 +41,9 @@ body {
     width: var(--card-width);
     height: var(--card-height);
     border: 5px solid #68C3D4;
-    background-color: #FFE8D1; 
     border-radius: 10px;
     color: #000000 ;
+    background-color: var(--unread-color);
     font-weight: bold;
     display: grid;
     overflow: hidden;
@@ -62,7 +63,7 @@ body {
     width: 20px;
     padding: 0;
     border: 0;
-    background-color: #FFE8D1;
+    background: none;
     font-weight: bold;
     color: #568EA3;
     justify-self: right;
