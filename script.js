@@ -1,12 +1,10 @@
-const myLibrary = [];
-
 function Book(title, author, pages, year, language) {
     // constructor
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.year = year;
-    this.language = language
+    this.language = language;
     this.read = false;
 
     this.info = function () {
@@ -15,8 +13,8 @@ function Book(title, author, pages, year, language) {
         }\nStatus: ${this.read ? 'read' : 'not read yet'}`;
     };
 
-    this.getHTML = function () {
-        let html = `<button>X</button>
+    this.getHTML = function (id) {
+        let html = `<button class="deleteBtn" id="btn${id}">X</button>
                     <div class="book-title">
                     ${this.title}
                     </div>
@@ -45,18 +43,31 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
+function deleteBook(event) {
+    let idx = event.currentTarget.id.slice(3);
+    myLibrary.splice(idx, 1);
+    displayBooks();
+    console.log(idx, myLibrary);
+}
+
 function displayBooks() {
     bookContainer = document.querySelector('.books-container');
-    for (let book of myLibrary) {
+    bookContainer.innerHTML = '';
+    for (let i = 0; i < myLibrary.length; i++) {
         let bookCard = document.createElement('div');
         bookCard.className = 'book-card';
-        bookCard.innerHTML = book.getHTML();
-        console.log(book.info());
-        bookCard.getEle
-
+        bookCard.innerHTML = myLibrary[i].getHTML(i);
         bookContainer.appendChild(bookCard);
     }
+
+    let deleteBtn = document.querySelectorAll('.deleteBtn');
+    for (let btn of deleteBtn) {
+        btn.addEventListener('click', deleteBook);
+    }
 }
+
+
+const myLibrary = [];
 
 var bookData = [
     {

@@ -67,3 +67,7 @@ body {
     color: #568EA3;
     justify-self: right;
 }
+
+.book-card > button:hover {
+    color: red;
+}
