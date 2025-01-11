@@ -46,7 +46,8 @@ function addBookToLibrary(book) {
 function deleteBook(event) {
     let idx = event.currentTarget.id.slice(3);
     myLibrary.splice(idx, 1);
-    displayBooks();
+    let bookCard = document.getElementById(`book${idx}`);
+    bookCard.remove();
     console.log(idx, myLibrary);
 }
 
@@ -70,7 +71,7 @@ function updateReadStatus(event) {
 }
 
 function displayBooks() {
-    bookContainer = document.querySelector('.books-container');
+    const bookContainer = document.querySelector('.books-container');
     bookContainer.innerHTML = '';
     for (let i = 0; i < myLibrary.length; i++) {
         let bookCard = document.createElement('div');

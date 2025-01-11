@@ -5,34 +5,57 @@
     --unread-color: #FFE8D1;
 }
 
+html {
+    display: grid;
+    min-height: 100%;
+}
 
 body {
+    display: grid;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', 'sans-serif';
+    min-height: 100%;
 }
 
 .container {
     display: grid;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 1fr 6fr;
+    grid-template-columns: 4fr 1fr;
 }
 
 .header {
     grid-row: 1 / 2;
+    grid-column: 1 / 3;
     background-color: #68C3D4;
     display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
     align-items: center;
     justify-content: center;
     font-size: 32px;
     color: #FFFFFF;
     font-weight: bold;
+    padding: 50px;
+}
+
+.header-title {
+    grid-column: 1 / 2;
+}
+
+
+.sidebar {
+    grid-column: 2 /3;
+    grid-row: 2 / 4;
+    background-color: #FFC0BE;
 }
 
 .books-container {
     grid-row: 2 / 3;
     padding: 20px;
+    padding-left: 100px;
     display: grid;
-    gap: 10px;
+    row-gap: 30px;
+    column-gap: 40px;
     grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
 }
 
