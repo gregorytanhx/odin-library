@@ -1,0 +1,69 @@
+:root {
+    --card-width: 300px;
+    --card-height: 180px;
+
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+}
+
+.header {
+    grid-row: 1 / 2;
+    background-color: #68C3D4;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.books-container {
+    grid-row: 2 / 3;
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+}
+
+.book-card {
+    padding: 20px;
+    width: var(--card-width);
+    height: var(--card-height);
+    border: 5px solid #68C3D4;
+    background-color: #FFE8D1; 
+    border-radius: 10px;
+    color: #000000 ;
+    font-weight: bold;
+    display: grid;
+    overflow: hidden;
+}
+
+.book-title {
+    font-size: 20px;
+}
+
+.read-status {
+    font-size: 15px;
+    justify-self: right;
+}
+
+.book-card > button {
+    font-size: 15px;
+    width: 20px;
+    padding: 0;
+    border: 0;
+    background-color: #FFE8D1;
+    font-weight: bold;
+    color: #568EA3;
+    justify-self: right;
+}
