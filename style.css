@@ -1,8 +1,8 @@
 :root {
     --card-width: 300px;
     --card-height: 180px;
-    --read-color: #D3BCC0;
-    --unread-color: #FFE8D1;
+    --read-color: #d3bcc0;
+    --unread-color: #ffe8d1;
 }
 
 html {
@@ -27,13 +27,13 @@ body {
 .header {
     grid-row: 1 / 2;
     grid-column: 1 / 3;
-    background-color: #68C3D4;
+    background-color: #68c3d4;
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
     align-items: center;
     justify-content: center;
     font-size: 32px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-weight: bold;
     padding: 50px;
 }
@@ -42,11 +42,10 @@ body {
     grid-column: 1 / 2;
 }
 
-
 .sidebar {
     grid-column: 2 /3;
     grid-row: 2 / 4;
-    background-color: #FFC0BE;
+    background-color: #ffc0be;
 }
 
 .books-container {
@@ -54,18 +53,39 @@ body {
     padding: 20px;
     padding-left: 100px;
     display: grid;
-    row-gap: 30px;
-    column-gap: 40px;
+    row-gap: 10px;
+    column-gap: 100px;
     grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+    grid-template-rows: auto;
 }
 
+.add-book {
+    border: 5px solid #000000;
+    background-color: #000000;
+    opacity: 0.7;
+    color: white;
+    font-size: 72px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-book:hover {
+    transform: scale(1.1);
+}
+
+.add-book,
 .book-card {
     padding: 20px;
     width: var(--card-width);
     height: var(--card-height);
-    border: 5px solid #68C3D4;
+
     border-radius: 10px;
-    color: #000000 ;
+}
+
+.book-card {
+    border: 5px solid #68c3d4;
+    color: #000000;
     background-color: var(--unread-color);
     font-weight: bold;
     display: grid;
@@ -88,7 +108,7 @@ body {
     border: 0;
     background: none;
     font-weight: bold;
-    color: #568EA3;
+    color: #568ea3;
     justify-self: right;
 }
 

@@ -72,7 +72,6 @@ function updateReadStatus(event) {
 
 function displayBooks() {
     const bookContainer = document.querySelector('.books-container');
-    bookContainer.innerHTML = '';
     for (let i = 0; i < myLibrary.length; i++) {
         let bookCard = document.createElement('div');
         bookCard.className = 'book-card';
