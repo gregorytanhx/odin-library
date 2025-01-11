@@ -1,11 +1,12 @@
-function Book(title, author, pages, year, language) {
+function Book(title, author, pages, year, language, img = '') {
     // constructor
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.year = year;
-    this.language = language;
+    this.title = arguments[0];
+    this.author = arguments[1];
+    this.pages = arguments[2];
+    this.year = arguments[3];
+    this.language = arguments[4];
     this.read = false;
+    this.img = img;
 
     this.info = function () {
         return `Title: ${this.title} Author: ${this.author} Pages: ${
@@ -40,7 +41,7 @@ function Book(title, author, pages, year, language) {
 }
 
 function addBookToLibrary(book) {
-    myLibrary.push(book);
+    myLibrary.splice(0, 0, book);
 }
 
 function deleteBook(event) {
@@ -49,10 +50,6 @@ function deleteBook(event) {
     let bookCard = document.getElementById(`book${idx}`);
     bookCard.remove();
     console.log(idx, myLibrary);
-}
-
-function addBook() {
-
 }
 
 function updateReadStatus(event) {
@@ -74,28 +71,40 @@ function updateReadStatus(event) {
     }
 }
 
-function displayBooks() {
+function addBookToDisplay(book, i) {
     const bookContainer = document.querySelector('.books-container');
-    for (let i = 0; i < myLibrary.length; i++) {
-        let bookCard = document.createElement('div');
-        bookCard.className = 'book-card';
-        bookCard.id = `book${i}`;
-        bookCard.innerHTML = myLibrary[i].getHTML(i);
-        bookContainer.appendChild(bookCard);
-    }
+    let bookCard = document.createElement('div');
+    bookCard.className = 'book-card';
+    bookCard.id = `book${i}`;
+    bookCard.innerHTML = book.getHTML(i);
 
-    // adds listener for delete buttons
-    let deleteBtn = document.querySelectorAll('.deleteBtn');
-    for (let btn of deleteBtn) {
-        btn.addEventListener('click', deleteBook);
-    }
+    // add button listeners
+    let deleteBtn = bookCard.querySelector('.deleteBtn');
+    deleteBtn.addEventListener('click', deleteBook);
 
-    // adds listener for mark as read toggle
+    let toggle = bookCard.querySelector('input[type=checkbox]');
+    toggle.addEventListener('input', updateReadStatus);
 
-    let toggles = document.querySelectorAll('input[type=checkbox]');
-    for (let toggle of toggles) {
-        toggle.addEventListener('input', updateReadStatus);
-    }
+    bookContainer.appendChild(bookCard);
+}
+
+function clearInputs(target) {
+    $(target)
+        .find(':input')
+        .each(function () {
+            switch (this.type) {
+                case 'password':
+                case 'select-multiple':
+                case 'select-one':
+                case 'text':
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
 }
 
 var style = window.getComputedStyle(document.body);
@@ -185,11 +194,41 @@ var bookData = [
     },
 ];
 
+const dialog = document.querySelector('dialog');
+const showBtn = document.querySelector('.add-book');
+const closeBtn = dialog.querySelector('#submitBtn');
+
+showBtn.addEventListener('click', () => {
+    dialog.showModal();
+});
+
+closeBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    // get all form data
+    const inputs = dialog.querySelectorAll('input[type=text]');
+    let values = [];
+    for (let i of inputs) {
+        values.push(i.value);
+    }
+    const checkbox = dialog.querySelector('input[type=checkbox]');
+    values.push(checkbox.checked);
+    console.log(values);
+    let book = new Book(values[0], values[1], values[2], values[3], values[4], values[5]);
+    addBookToLibrary(book);
+    addBookToDisplay(book, myLibrary.length-1);
+    
+    document.getElementById("dialog-form").reset();
+
+    dialog.close();
+});
+
 for (let i of bookData) {
-    addBookToLibrary(new Book(i.title, i.author, i.pages, i.year, i.language));
+    addBookToLibrary(
+        new Book(i.title, i.author, i.pages, i.year, i.language, (img = i.link))
+    );
 }
 
-document.querySelector(".add-book").addEventListener("click", addBook);
-
-
-displayBooks();
+for (let i = 0; i < myLibrary.length; i++) {
+    addBookToDisplay(myLibrary[i], i);
+}

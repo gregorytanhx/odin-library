@@ -18,6 +18,58 @@ body {
     min-height: 100%;
 }
 
+dialog[open] {
+    border-radius: 10px;
+    border: none;
+}
+
+dialog > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    padding: 10px;
+    gap: 5px;
+    font-size: 20px;
+   
+}
+
+dialog > form > input {
+    width: 300px;
+    height: 25px;
+    border-radius: 3px;
+    border: 1px solid #7F95D1;
+}
+
+input[type="checkbox"] {
+    width: 1em;
+    height: 1rem;
+}
+
+#submitBtn {
+    background-color: #68c3d4;
+}
+
+#cancelBtn {
+    background-color: #F56476;
+}
+
+.dialog-buttons >  button {
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    color: white;
+}
+
+.dialog-buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
 .container {
     margin:0;
     display: grid;
@@ -100,7 +152,9 @@ body {
 
 .read-status {
     font-size: 15px;
+    display: flex;
     justify-self: right;
+    align-items: center;
 }
 
 .book-card > button {
